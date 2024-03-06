@@ -10,23 +10,27 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP _anRpackage_rcpp_hello_world() {
+// distance_point_to_line_impl
+SEXP distance_point_to_line_impl(double x_point, double y_point, NumericVector x_line, NumericVector y_line);
+RcppExport SEXP _roverlap_distance_point_to_line_impl(SEXP x_pointSEXP, SEXP y_pointSEXP, SEXP x_lineSEXP, SEXP y_lineSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpp_hello_world());
+    Rcpp::traits::input_parameter< double >::type x_point(x_pointSEXP);
+    Rcpp::traits::input_parameter< double >::type y_point(y_pointSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x_line(x_lineSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y_line(y_lineSEXP);
+    rcpp_result_gen = Rcpp::wrap(distance_point_to_line_impl(x_point, y_point, x_line, y_line));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_anRpackage_rcpp_hello_world", (DL_FUNC) &_anRpackage_rcpp_hello_world, 0},
+    {"_roverlap_distance_point_to_line_impl", (DL_FUNC) &_roverlap_distance_point_to_line_impl, 4},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_anRpackage(DllInfo *dll) {
+RcppExport void R_init_roverlap(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
