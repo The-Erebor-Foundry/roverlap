@@ -172,8 +172,8 @@ bool impl_ray_casting(double x_point,
   Line side = Line(
     x_polygon[0],
     y_polygon[0],
-    x_polygon[n_polygon_points],
-    y_polygon[n_polygon_points]
+    x_polygon[n_polygon_points - 1],
+    y_polygon[n_polygon_points - 1]
   );
   if (side.ray_intersect_(ray)) {
     n_intersects += 1;
@@ -265,6 +265,9 @@ double Line::line_slope_(double x1, double y1, double x2, double y2) {
 }
 
 double Line::y_intercept_(double x, double y, double slope) {
+  if (is_vertical) {
+    return 0;
+  }
   return y - x * slope;
 }
 
