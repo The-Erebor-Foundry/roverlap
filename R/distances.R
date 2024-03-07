@@ -1,14 +1,17 @@
 
 distance_point_to_line <- function(x_point, y_point, x_line, y_line) {
   check_line_coords__(x_line, y_line)
-  distance_point_to_line_impl(x_point, y_point, x_line, y_line)
+  distance_point_to_line_cpp(x_point, y_point, x_line, y_line)
 }
 
 is_na_null__ <- function(x) {
   is.null(x) || is.na(x)
 }
 
-point_overlapping_line <- function(x_point, y_point, distance, x_line, y_line) {
+
+
+
+point_overlap_line <- function(x_point, y_point, distance, x_line, y_line) {
   if (is_na_null__(x_point) || is_na_null__(y_point) || is_na_null__(distance)) {
     stop("[ERROR]: The `x_point`, `y_point`, and the `distance` arguments should neither be NA or NULL values!")
   }
@@ -17,10 +20,13 @@ point_overlapping_line <- function(x_point, y_point, distance, x_line, y_line) {
   }
   check_line_coords__(x_line, y_line)
   
-  point_overlap_line_impl(x_point, y_point, distance, x_line, y_line)
+  point_overlap_line_cpp(x_point, y_point, distance, x_line, y_line)
 }
 
-npoints_overlapping_line <- function(x_points, y_points, distance, x_line, y_line) {
+
+
+
+npoints_overlap_line <- function(x_points, y_points, distance, x_line, y_line) {
   if (any(is.na(x_points)) || any(is.na(y_points))) {
     stop("[ERROR]: The `x_points`, `y_points` arguments cannot contain NA values!")
   }
@@ -29,8 +35,34 @@ npoints_overlapping_line <- function(x_points, y_points, distance, x_line, y_lin
   }
   check_line_coords__(x_line, y_line)
   
-  npoints_overlapping_line_impl(x_points, y_points, distance, x_line, y_line)
+  npoints_overlap_line_cpp(x_points, y_points, distance, x_line, y_line)
 }
+
+
+
+
+point_in_polygon <- function(x_point, y_point, x_polygon, y_polygon) {
+  max_x <- max(x_polygon)
+  min_x <- min(x_polygon)
+  max_y <- max(y_polygon)
+  min_y <- min(y_polygon)
+  point_in_polygon_cpp(
+    x_point,
+    y_point,
+    x_polygon,
+    y_polygon,
+    max_x,
+    min_x,
+    max_y,
+    min_y
+  )
+}
+
+
+
+
+
+
 
 
 check_line_coords__ <- function(x_line, y_line) {
