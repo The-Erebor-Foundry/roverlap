@@ -15,13 +15,12 @@ SEXP distance_point_to_line_impl(double x_point,
     double y2_line = y_line[1];
     
     double a = (y2_line - y1_line);
-    double b = (x2_line - x1_line);
-    double c = x1_line * y2_line - x2_line * y1_line;
-    
+    double b = (x1_line - x2_line);
+    double c = y1_line * (x2_line - x1_line) - (y2_line - y1_line) * x1_line;
     double d1 = abs(a * x_point + b * y_point + c);
     double d2 = sqrt(a * a + b * b);
-    double distance = d1 / d2;
-    return wrap(distance);
+    double d = d1 / d2;
+    return wrap(d);
 }
 
 
