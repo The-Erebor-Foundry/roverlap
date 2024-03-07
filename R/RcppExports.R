@@ -9,3 +9,7 @@ point_overlap_line_impl <- function(x_point, y_point, distance, x_line, y_line) 
     .Call(`_roverlap_point_overlap_line_impl`, x_point, y_point, distance, x_line, y_line)
 }
 
+npoints_overlapping_line_impl <- function(x_points, y_points, distance, x_line, y_line) {
+    .Call(`_roverlap_npoints_overlapping_line_impl`, x_points, y_points, distance, x_line, y_line)
+}
+

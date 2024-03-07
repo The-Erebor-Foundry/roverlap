@@ -39,10 +39,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// npoints_overlapping_line_impl
+SEXP npoints_overlapping_line_impl(NumericVector x_points, NumericVector y_points, double distance, NumericVector x_line, NumericVector y_line);
+RcppExport SEXP _roverlap_npoints_overlapping_line_impl(SEXP x_pointsSEXP, SEXP y_pointsSEXP, SEXP distanceSEXP, SEXP x_lineSEXP, SEXP y_lineSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x_points(x_pointsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y_points(y_pointsSEXP);
+    Rcpp::traits::input_parameter< double >::type distance(distanceSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x_line(x_lineSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y_line(y_lineSEXP);
+    rcpp_result_gen = Rcpp::wrap(npoints_overlapping_line_impl(x_points, y_points, distance, x_line, y_line));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_roverlap_distance_point_to_line_impl", (DL_FUNC) &_roverlap_distance_point_to_line_impl, 4},
     {"_roverlap_point_overlap_line_impl", (DL_FUNC) &_roverlap_point_overlap_line_impl, 5},
+    {"_roverlap_npoints_overlapping_line_impl", (DL_FUNC) &_roverlap_npoints_overlapping_line_impl, 5},
     {NULL, NULL, 0}
 };
 
