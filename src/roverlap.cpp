@@ -218,6 +218,13 @@ Line::Line(double x1, double x2, double y) {
 
 bool Line::ray_intersect_(Line ray) {
   double eps = 0.00001;
+  if (ray.lower_x == lower_x || ray.lower_x == upper_x) {
+    ray.lower_x += eps;  
+  }
+  if (ray.lower_y == lower_y || ray.lower_y == upper_y) {
+    ray.lower_y += eps;
+  }
+  
   if (is_vertical) {
     if ((ray.upper_y <= upper_y)
          && (ray.lower_y >= lower_y)
