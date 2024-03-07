@@ -8,8 +8,27 @@ double dmax(double v1, double v2);
 
 // Distance between two points.
 double distance_(double x1, double y1, double x2, double y2);
-double line_slope_(double x1, double y1, double x2, double y2);
-double y_intercept_(double x, double y, double slope);
+
+
+
+class Line {
+public:
+  double lower_x;
+  double lower_y;
+  double upper_x;
+  double upper_y;
+  bool is_vertical;
+  double slope;
+  double y_intercept;
+
+public:
+  Line(double x1, double y1, double x2, double y2);
+  Line(double x1, double x2, double y);
+  bool ray_intersect_(Line ray);
+  double line_slope_(double x1, double y1, double x2, double y2);
+  double y_intercept_(double x, double y, double slope);
+};
+
 
 
 
