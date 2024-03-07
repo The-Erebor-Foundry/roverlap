@@ -5,3 +5,7 @@ distance_point_to_line_impl <- function(x_point, y_point, x_line, y_line) {
     .Call(`_roverlap_distance_point_to_line_impl`, x_point, y_point, x_line, y_line)
 }
 
+point_overlap_line_impl <- function(x_point, y_point, distance, x_line, y_line) {
+    .Call(`_roverlap_point_overlap_line_impl`, x_point, y_point, distance, x_line, y_line)
+}
+

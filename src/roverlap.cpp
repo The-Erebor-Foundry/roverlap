@@ -23,3 +23,40 @@ SEXP distance_point_to_line_impl(double x_point,
     double distance = d1 / d2;
     return wrap(distance);
 }
+
+
+double distance(double x1, double y1, double x2, double y2) {
+  double s1 = pow(x2 - x1, 2.0);
+  double s2 = pow(y2 - y1, 2.0);
+  return sqrt(s1 + s2);
+}
+
+
+
+
+// [[Rcpp::export]]
+SEXP point_overlap_line_impl(double x_point,
+                             double y_point,
+                             double distance,
+                             NumericVector x_line,
+                             NumericVector y_line) {
+  
+  double x1_line = x_line[0];
+  double x2_line = x_line[1];
+  double y1_line = y_line[0];
+  double y2_line = y_line[1];
+  
+  double a = (y2_line - y1_line);
+  double b = (x2_line - x1_line);
+  double c = x1_line * y2_line - x2_line * y1_line;
+  
+  double d1 = abs(a * x_point + b * y_point + c);
+  double d2 = sqrt(a * a + b * b);
+  double d = d1 / d2;
+  
+  if (d < distance) {
+    return wrap(true);
+  }
+  return wrap(false);
+}
+
