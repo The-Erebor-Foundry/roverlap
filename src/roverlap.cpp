@@ -168,7 +168,16 @@ bool impl_ray_casting(double x_point,
   int n_polygon_points = x_polygon.length();
 
   double x_ray_end = max_x_polygon + 1e6;
-  Line ray = Line(x_point, x_ray_end, y_point); 
+  Line ray = Line(x_point, x_ray_end, y_point);
+  Line side = Line(
+    x_polygon[0],
+    y_polygon[0],
+    x_polygon[n_polygon_points],
+    y_polygon[n_polygon_points]
+  );
+  if (side.ray_intersect_(ray)) {
+    n_intersects += 1;
+  }
 
   for (int i = 0; i < n_polygon_points - 1; i++) {
     double ax = x_polygon[i];
@@ -176,7 +185,7 @@ bool impl_ray_casting(double x_point,
     double bx = x_polygon[i + 1];
     double by = y_polygon[i + 1];
 
-    Line side = Line(ax, ay, bx, by);
+    side = Line(ax, ay, bx, by);
     if (side.ray_intersect_(ray)) {
       n_intersects += 1;
     }
