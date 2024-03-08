@@ -42,6 +42,24 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// npoints_in_polygon_cpp
+SEXP npoints_in_polygon_cpp(NumericVector x_points, NumericVector y_points, NumericVector x_polygon, NumericVector y_polygon, double max_x_polygon, double min_x_polygon, double max_y_polygon, double min_y_polygon);
+RcppExport SEXP _roverlap_npoints_in_polygon_cpp(SEXP x_pointsSEXP, SEXP y_pointsSEXP, SEXP x_polygonSEXP, SEXP y_polygonSEXP, SEXP max_x_polygonSEXP, SEXP min_x_polygonSEXP, SEXP max_y_polygonSEXP, SEXP min_y_polygonSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x_points(x_pointsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y_points(y_pointsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x_polygon(x_polygonSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y_polygon(y_polygonSEXP);
+    Rcpp::traits::input_parameter< double >::type max_x_polygon(max_x_polygonSEXP);
+    Rcpp::traits::input_parameter< double >::type min_x_polygon(min_x_polygonSEXP);
+    Rcpp::traits::input_parameter< double >::type max_y_polygon(max_y_polygonSEXP);
+    Rcpp::traits::input_parameter< double >::type min_y_polygon(min_y_polygonSEXP);
+    rcpp_result_gen = Rcpp::wrap(npoints_in_polygon_cpp(x_points, y_points, x_polygon, y_polygon, max_x_polygon, min_x_polygon, max_y_polygon, min_y_polygon));
+    return rcpp_result_gen;
+END_RCPP
+}
 // point_overlap_line_cpp
 SEXP point_overlap_line_cpp(double x_point, double y_point, double distance, NumericVector x_line, NumericVector y_line);
 RcppExport SEXP _roverlap_point_overlap_line_cpp(SEXP x_pointSEXP, SEXP y_pointSEXP, SEXP distanceSEXP, SEXP x_lineSEXP, SEXP y_lineSEXP) {
@@ -76,6 +94,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_roverlap_distance_point_to_line_cpp", (DL_FUNC) &_roverlap_distance_point_to_line_cpp, 4},
     {"_roverlap_point_in_polygon_cpp", (DL_FUNC) &_roverlap_point_in_polygon_cpp, 8},
+    {"_roverlap_npoints_in_polygon_cpp", (DL_FUNC) &_roverlap_npoints_in_polygon_cpp, 8},
     {"_roverlap_point_overlap_line_cpp", (DL_FUNC) &_roverlap_point_overlap_line_cpp, 5},
     {"_roverlap_npoints_overlap_line_cpp", (DL_FUNC) &_roverlap_npoints_overlap_line_cpp, 5},
     {NULL, NULL, 0}

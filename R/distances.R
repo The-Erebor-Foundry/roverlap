@@ -41,6 +41,24 @@ npoints_overlap_line <- function(x_points, y_points, distance, x_line, y_line) {
 
 
 
+npoints_in_polygon <- function(x_points, y_points, x_polygon, y_polygon) {
+  max_x <- max(x_polygon)
+  min_x <- min(x_polygon)
+  max_y <- max(y_polygon)
+  min_y <- min(y_polygon)
+  npoints_in_polygon_cpp(
+    x_points,
+    y_points,
+    x_polygon,
+    y_polygon,
+    max_x,
+    min_x,
+    max_y,
+    min_y
+  )
+}
+
+
 point_in_polygon <- function(x_point, y_point, x_polygon, y_polygon) {
   max_x <- max(x_polygon)
   min_x <- min(x_polygon)

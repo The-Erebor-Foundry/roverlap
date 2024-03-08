@@ -9,6 +9,10 @@ point_in_polygon_cpp <- function(x_point, y_point, x_polygon, y_polygon, max_x_p
     .Call(`_roverlap_point_in_polygon_cpp`, x_point, y_point, x_polygon, y_polygon, max_x_polygon, min_x_polygon, max_y_polygon, min_y_polygon)
 }
 
+npoints_in_polygon_cpp <- function(x_points, y_points, x_polygon, y_polygon, max_x_polygon, min_x_polygon, max_y_polygon, min_y_polygon) {
+    .Call(`_roverlap_npoints_in_polygon_cpp`, x_points, y_points, x_polygon, y_polygon, max_x_polygon, min_x_polygon, max_y_polygon, min_y_polygon)
+}
+
 point_overlap_line_cpp <- function(x_point, y_point, distance, x_line, y_line) {
     .Call(`_roverlap_point_overlap_line_cpp`, x_point, y_point, distance, x_line, y_line)
 }
