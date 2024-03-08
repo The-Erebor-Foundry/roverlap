@@ -38,7 +38,7 @@ SEXP point_in_polygon_cpp(double x_point,
                           double min_x_polygon,
                           double max_y_polygon,
                           double min_y_polygon) {
-  bool result = impl_ray_casting(
+  bool result = _impl_ray_casting(
     x_point,
     y_point,
     x_polygon,
@@ -50,6 +50,34 @@ SEXP point_in_polygon_cpp(double x_point,
   );
 
   return wrap(result);
+}
+
+
+// [[Rcpp::export]]
+SEXP npoints_in_polygon_cpp(NumericVector x_points,
+                            NumericVector y_points,
+                            NumericVector x_polygon,
+                            NumericVector y_polygon,
+                            double max_x_polygon,
+                            double min_x_polygon,
+                            double max_y_polygon,
+                            double min_y_polygon) {
+  int n_points = x_points.length();
+  LogicalVector results(n_points);
+  for (int i = 0; i < n_points; i++) {
+    results[i] = _impl_ray_casting(
+      x_points[i],
+      y_points[i],
+      x_polygon,
+      y_polygon,
+      max_x_polygon,
+      min_x_polygon,
+      max_y_polygon,
+      min_y_polygon
+    );
+  }
+
+  return wrap(results);
 }
 
 
@@ -154,14 +182,14 @@ SEXP npoints_overlap_line_cpp(NumericVector x_points,
 
 // Raycasting algorithm
 
-bool impl_ray_casting(double x_point,
-                      double y_point,
-                      NumericVector x_polygon,
-                      NumericVector y_polygon,
-                      double max_x_polygon,
-                      double min_x_polygon,
-                      double max_y_polygon,
-                      double min_y_polygon) {
+bool _impl_ray_casting(double x_point,
+                       double y_point,
+                       NumericVector x_polygon,
+                       NumericVector y_polygon,
+                       double max_x_polygon,
+                       double min_x_polygon,
+                       double max_y_polygon,
+                       double min_y_polygon) {
 
   double eps = 0.000001;
   int n_intersects = 0;
@@ -224,14 +252,14 @@ bool Line::ray_intersect_(Line ray) {
   if (ray.lower_y == lower_y || ray.lower_y == upper_y) {
     ray.lower_y += eps;
   }
-  
+
   if (is_vertical) {
     if ((ray.upper_y <= upper_y)
-         && (ray.lower_y >= lower_y)
-         && (ray.lower_x < lower_x)) {
+      && (ray.lower_y >= lower_y)
+      && (ray.lower_x < lower_x)) {
       return true;
     }
-    
+
     return false;
   }
 
